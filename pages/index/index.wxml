@@ -1,0 +1,40 @@
+<!--index.wxml-->
+<view class="container" style="height:{{mapheight}}px;">
+  <button class="start" bindtap="showDialogBtn" style="position: absolute;top:{{bottonheight}}px;width: 70px;height:60px"></button>
+  <view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}" style="width: {{mapwidth}}px;height:{{mapheight}}px;"></view>
+  <view class="modal-dialog" wx:if="{{showModal}}" style="height:{{mapheight}}px;width: {{mapwidth}}px;background-image: url({{pageback}});" >
+    <view class="modal-container">
+      <view class="modal-content">
+        {{pagecontent}}
+      <image class="rule" wx:if="{{pagenum==2}}" src="https://636c-cloud1-6goql39af90fcd31-1313692077.tcb.qcloud.la/rule.gif?sign=5153d190802e6acc90574101a5271bb0&t=1662261822" style="width: 100%;height: 150px;"></image>
+      
+      <!-- <form bindsubmit="back_houtai" wx:if="{{pagenum==4}}">
+      <view class="modal-container">
+        <view class="modal-content">
+          {{pagecontent}}
+            <view class="modal-input">
+              <input placeholder-class="input-holder" type="text" maxlength="10" bindinput="inputChangecall" class="input" placeholder="{{callword}}" name="call"></input>
+            </view>
+            <view class="modal-input">
+              <input placeholder-class="input-holder" type="number" maxlength="11" bindinput="inputChangestdid" class="input" placeholder="{{stdidword}}" name="stdid"></input>
+            </view>
+            <view class="modal-input">
+              <input placeholder-class="input-holder" type="number" maxlength="11" bindinput="inputChangetele" class="input" placeholder="{{teleword}}" name="tele"></input>
+            </view>
+      </view>
+          <view class="modal-footer">
+            <button class="btn-continue" bindtap="onCancel" data-status="cancel" style="background: transparent"></button>
+            <button class="btn-submit" bindtap="onConfirm" data-status="confirm" style="background: transparent" formType="submit"></button>
+          </view>
+    </view>
+  </form> -->
+      </view>
+      <!-- <view class="modal-footer" wx:if="{{pagenum!=4}}"> -->
+      <view class="modal-footer">
+        <view class="btn-cancel" bindtap="onCancel" data-status="cancel"></view>
+        <view class="btn-confirm" bindtap="onConfirm" data-status="confirm"></view>
+      </view>
+    </view>
+  </view>
+</view>
+

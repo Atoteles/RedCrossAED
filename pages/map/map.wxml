@@ -1,0 +1,100 @@
+<!--pages/map/map.wxml-->
+<view class="swiper-tab">  
+  <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" data-wd="31.296794" data-jd="121.503359" bindtap="swichNav">邯郸</view>  
+  <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" data-wd="31.336411" data-jd="121.50575" bindtap="swichNav">江湾</view>  
+  <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" data-wd="31.19674" data-jd="121.451124" bindtap="swichNav">枫林</view>  
+  <view class="swiper-tab-list {{currentTab==3 ? 'on' : ''}}" data-current="3" data-wd="31.189458" data-jd="121.598515" bindtap="swichNav">张江</view>  
+</view>
+<map longitude="{{jd}}"
+  latitude="{{wd}}"
+  scale="16" 
+  show-location= true
+  enable-building= true
+  id = 'fdu'
+  style="height:{{mapheight}}px"
+  bindpoitap='mapclick'
+  bindcallouttap="showDialogBtn"
+  markers= "{{markers}}">
+  <cover-view slot="callout">
+    <block wx:for="{{NoId}}" wx:key="*this">
+      <cover-view class="customCalloutno" marker-id="{{item}}" >
+        <cover-view class="content" > 
+          {{contentNo}}
+        </cover-view>
+      </cover-view>
+    </block>
+
+    <block wx:for="{{KongId}}" wx:key="*this">
+      <cover-view class="customCalloutnan" marker-id="{{item}}" >
+        <cover-image class="icon" src="../../img/haveaed.jpg" ></cover-image>
+      </cover-view>
+    </block> 
+
+    <block wx:for="{{NanId}}" wx:key="*this">
+      <cover-view class="customCalloutnan" marker-id="{{item}}" >
+        <cover-image class="icon" src="../../img/noaed.jpg" ></cover-image>
+      </cover-view>
+    </block>
+  </cover-view>
+  <view class="pad">
+    <view style="font-size: 15px">积分：{{score}}</view>
+    <view style="font-size: 15px">用时：{{time}}s</view>
+    <button style="width: 90%;margin-top:20rpx;padding-bottom:20rpx;" bindtap="showDialogBtn1">提交</button>
+  </view>
+</map>
+
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{questype!='null'}}" style="width: {{maskwidth}}px;height:{{maskheight}}px;"></view>
+<view class="modal-dialog-ques" wx:if="{{questype!='null'}}" style="height:{{maskheight}}px;width: {{maskwidth}}px">
+  <view class="modal-container" wx:if="{{Quesstatus==1}}">
+    <view class="modal-title">{{question}}</view>
+    <view class="modal-content">
+      <radio-group class="choice" bindchange="singleChange" wx:if="{{questype=='single'}}">
+        <radio class="check" color="red" value="1">{{answer1}}</radio>
+        <radio class="check" color="red" value="2">{{answer2}}</radio>
+        <radio class="check" color="red" value="3">{{answer3}}</radio>
+        <radio class="check" color="red" value="4">{{answer4}}</radio>
+      </radio-group>
+
+      <checkbox-group class="choice" bindchange="multiChange" wx:if="{{questype=='multi'}}">
+        <checkbox class="check" color="red" value="1">{{answer1}}</checkbox>
+        <checkbox class="check" color="red" value="2">{{answer2}}</checkbox>
+        <checkbox class="check" color="red" value="3">{{answer3}}</checkbox>
+        <checkbox class="check" color="red" value="4">{{answer4}}</checkbox>
+        <checkbox class="check" color="red" value="5" wx:if="{{choicenum==5||choicenum==6||choicenum==8}}">{{answer5}}</checkbox>
+        <checkbox class="check" color="red" value="6" wx:if="{{choicenum==6||choicenum==8}}">{{answer6}}</checkbox>
+        <checkbox class="check" color="red" value="7" wx:if="{{choicenum==8}}">{{answer7}}</checkbox>
+        <checkbox class="check" color="red" value="8" wx:if="{{choicenum==8}}">{{answer8}}</checkbox>
+      </checkbox-group>
+    </view>
+    <view class="modal-footer">
+      <view class="btn-cancel" bindtap="onCancel" data-status="cancel">放弃</view>
+      <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">确定</view>
+    </view>
+  </view>
+  <view class="modal-container" wx:if="{{Answerstatus==1}}">
+    <view class="modal-content"><text>{{solution}}</text></view>
+    <view class="modal-footer">
+      <view class="btn-cancel" bindtap="onCancel" data-status="cancel">退出</view>
+      <view class="btn-confirm" bindtap="onConfirm" data-status="confirm">继续</view>
+    </view>
+  </view>
+
+</view>
+
+<view class="modal-mask" catchtouchmove="preventTouchMove" wx:if="{{pagenum!=0}}" style="width: {{maskwidth}}px;height:{{maskheight}}px;"></view>
+<view class="modal-dialog-sub" wx:if="{{pagenum!=0}}" style="height:{{maskheight}}px;width: {{maskwidth}}px">
+  <view class="modal-container-sub">
+    <view class="modal-content-sub" style="font-size: medium;">
+      <text>{{submitwords}}</text>
+      <text wx:if="{{pagenum==2}}" style="color:red;font-weight: bolder;">请将此页截屏保存，使用学号邮箱将此截图发送邮件至21300120036@m.fudan.edu.cn。活动结束后若您获奖，我们将通过该邮箱联系您。</text>
+    </view>
+    <view class="modal-footer-sub" wx:if="{{pagenum==1}}">
+      <view class="btn-cancel" bindtap="onCancel1" data-status="cancel">放弃</view>
+      <view class="btn-confirm" bindtap="onConfirm1" data-status="confirm">确定</view>
+    </view>
+    <view class="modal-footer-sub" wx:if="{{pagenum==2}}">
+      <view class="btn-cancel" bindtap="changetostdmap" data-status="cancel">退出</view>
+      <view class="btn-confirm" bindtap="changetostdmap" data-status="confirm">查看AED地图</view>
+    </view>
+  </view>
+</view>

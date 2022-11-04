@@ -1,0 +1,10 @@
+<!--pages/stdmap.wxml-->
+<!-- <text>pages/stdmap.wxml</text> -->
+<!-- <view class="container" style="height:{{mapheight}}px;">
+  <image src="../../img/aedmap.png" style="height:100%" display:block></image>
+</view> -->
+<scroll-view scroll-x="true" style="width:{{mapwidth}};height:{{mapheight}}px;">
+  <view class="img-size" style="height: 100%;margin: auto;">
+    <image src="https://636c-cloud1-6goql39af90fcd31-1313692077.tcb.qcloud.la/aedmap.png?sign=a1a8ce4bd707c98b6dcac3d81968be2e&t=1662536341" mode="heightFix" class="std-img" style="width: 100%;height: 100%;"></image>
+  </view>
+</scroll-view>

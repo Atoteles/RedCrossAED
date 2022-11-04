@@ -1,0 +1,12 @@
+/* pages/stdmap.wxss */
+.container {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  /* background-image: url("https://636c-cloud1-6goql39af90fcd31-1313692077.tcb.qcloud.la/aedmap.png?sign=a1a8ce4bd707c98b6dcac3d81968be2e&t=1662536341"); */
+  /* background-size: cover; */
+  /* -moz-background-size:100% 100%; */
+  background-repeat: no-repeat;
+  background-position:center center;
+}
